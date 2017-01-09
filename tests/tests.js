@@ -1,36 +1,96 @@
-// testing code goes here
-
+(function(){
 'use strict'
 
-var chai = require('chai');
-var assert = chai.assert;
+var jasmine = require('jasmine');
+
 
 var myApp = require('../app/library.js');
 
-describe("Test for proper arithmetic functionality", function() {
-  it("should return 2 as average for 1, 2, 3", function() {
-    assert(myApp.computeAverage(1,2,3) == 3);
-  })
-  it("should return 5 as average for 3, 7, 5", function() {
-    assert(myApp.computeAverage(3, 7, 5) == 5);
-  })
-  it("should return 120 as factorial for 5", function() {
-    assert(myApp.computeFactorial(5) == 120);
-  })
-})
+  describe("Data types tests ", function() {
+  describe("Case for some falsy values", function() {
+
+    it("should return 'no value' for null", function() {
+      expect(myApp.dataTypes(null)).toEqual('no value');
+    });
+
+    it("should return 'no value' for undefined", function() {
+      expect(myApp.dataTypes(undefined)).toEqual('no value');
+    });
+
+  });
+
+  describe("Case for booleans", function() {
+
+    it("should return true for `true`", function() {
+      expect(myApp.dataTypes(true)).toBe(true);
+    });
+
+    it("should return false for `false`", function() {
+      expect(myApp.dataTypes(false)).toBe(false);
+    });
+
+  });
+
+  describe("Case for Numbers", function() {
+
+    it("should return 'less than 100' for 44", function() {
+      expect(myApp.dataTypes(44)).toBe('less than 100');
+    });
+
+    it("should return 'more than 100' for 144", function() {
+      expect(myApp.dataTypes(144)).toBe('more than 100');
+    });
+
+    it("should return 'equal to 100' for 100", function() {
+      expect(myApp.dataTypes(100)).toBe('equal to 100');
+    });
 
 
-describe("Test for temperature conversion functionality", function() {
-  it("should return X for Celcius value Y", function() {
-    assert(myApp.convertTempCtoF(40) == 104);
-  })
-  it("should return X for Celcius value Y", function() {
-    assert(myApp.convertTempCtoF(60) == 140);
-  })
-  it("should return Y for Fahrenheit value X", function() {
-    assert(myApp.convertTempFtoC(140) == 60);
-  })
-  it("should return Y for Fahrenheit value X", function() {
-    assert(myApp.convertTempFtoC(104) == 40);
-  })
-})
+  });
+
+  describe("Case for Strings", function() {
+
+    it("should return the length of `tergiversate`", function() {
+      expect(myApp.dataTypes('tergiversate')).toBe(12);
+    });
+
+    it("should return the length of an empty string", function() {
+      expect(myApp.dataTypes('')).toBe(0);
+    });
+
+    it("should return the length of `555`", function() {
+      expect(myApp.dataTypes('555')).toBe(3);
+    });
+
+  });
+
+  describe("Case for arrays", function() {
+
+    it("should return `2` for `[0, 1, 2]`", function() {
+      expect(myApp.dataTypes([0, 1, 2])).toBe(2);
+    });
+
+    it("should return `undefined` for `[]`", function() {
+      expect(myApp.dataTypes([])).not.toBeDefined();
+    });
+
+    it("should return `undefined` for `[4, 9]`", function() {
+      expect(myApp.dataTypes([4, 9])).not.toBeDefined();
+    });
+
+  });
+  describe("Case for functions", function() {
+
+    it("should call the `callback` function with argument true, and return `called callback`", function() {
+      var callback = function(arg) {
+        expect(arg).toBeTruthy();
+        if(arg === true) {
+          return 'called callback';
+        }
+      };
+      expect(myApp.dataTypes(callback)).toBe('called callback');
+    });
+
+  });
+});
+})();
