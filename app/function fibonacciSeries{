@@ -1,0 +1,17 @@
+function fibonacciSeries{
+	var fibo=[0,1];
+	var i=0;
+	var x=0;
+	while (True)
+	{
+	x=fibo[i] +fibo[i+1]
+		if (x>n) 
+		{
+			break;
+		} 
+		fibo.push(x);
+        i+=1;
+	}
+	return fibo
+
+}
